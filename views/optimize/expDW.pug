@@ -1,0 +1,43 @@
+doctype html
+html
+  head
+    title= title
+    script(src="https://www.googletagmanager.com/gtag/js?id=UA-197045426-1" async) 
+
+    script.
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        gtag('set', {'experiments': [{'id': "#{optimize_expId}", 'variant': "#{optimize_expVar}"}]});
+
+        gtag('config', 'UA-197045426-1');
+        gtag('event', 'test_optmize', {
+          'event_category' : 'optmize_server_side_dw',
+          'event_label' : Date.now(),
+        });
+  body
+    block content
+    h1= title
+    h3= expTitle
+
+    script.
+        function removeItem(sKey, sPath, sDomain) {
+          //- if (!sKey || !this.hasItem(sKey)) { return false; }
+          document.cookie = encodeURIComponent(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + ( sDomain ? "; domain=" + sDomain : "") + ( sPath ? "; path=" + sPath : "");
+          return true;
+        }
+        function clearAllCookie() {
+          var keys = document.cookie.match(/[^ =;]+(?=\=)/g);
+          if(keys) {
+            for(var i = keys.length; i--;)
+              removeItem(keys[i],"/");
+              document.cookie = keys[i] + '=0;expires=' + new Date(0).toUTCString()
+          }
+        }
+        setTimeout(() => {
+          clearAllCookie()
+        }, 500);
+        setTimeout(() => {
+          location.reload();
+        }, 1000);

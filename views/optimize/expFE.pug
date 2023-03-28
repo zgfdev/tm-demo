@@ -1,0 +1,43 @@
+doctype html
+html
+  head
+    title= title
+    script(src="https://www.googletagmanager.com/gtag/js?id=UA-197045426-1" async) 
+    script.
+        var g_getCookie = function(name){return document.cookie.match(`[;\s+]?${name}=([^;]*)`)?.pop()};
+        var g_setCookie = function(name,value){document.cookie = name+"="+encodeURIComponent(value)+";expires="+ new Date(new Date().getTime() + 63072e6).toGMTString() + "; path=/";}
+        var g_getExpVar = function(expId,max){
+            var cookieName="gOpt_expVar_"+expId;
+            if(g_getCookie(cookieName)){
+                return g_getCookie(cookieName);
+            }else{
+                var expVar = Math.floor(Math.random() * max); g_setCookie(cookieName,expVar);
+                return expVar;
+            };
+        };
+        var optimize_expId="4_MwALBYTKaaSPDBsALAqg";
+        var optimize_expVar=g_getExpVar(optimize_expId,4); // 0/1/2/3
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('set', {'experiments': [{'id': optimize_expId, 'variant': optimize_expVar}]});
+        gtag('config', 'UA-197045426-1'); 
+        gtag('event', 'test_optmize', {
+          'event_category' : 'optmize_server_side_fe',
+          'event_label' : Date.now()
+        });
+
+
+  body
+    h1= title
+    h3
+    script.
+        fetch('/demo/optimize/var/',{
+          method: 'POST',
+          headers: {'content-type': 'application/json'},
+          body: JSON.stringify({var:String(window.optimize_expVar)})
+        })
+        .then(res => res.json())
+        .then(data => {
+          document.getElementsByTagName("h3")[0].innerHTML=data;
+        });
