@@ -17,10 +17,13 @@ html
         };
         var optimize_expId="4_MwALBYTKaaSPDBsALAqg";
         var optimize_expVar=g_getExpVar(optimize_expId,4); // 0/1/2/3
+        
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
+
         gtag('set', {'experiments': [{'id': optimize_expId, 'variant': optimize_expVar}]});
+
         gtag('config', 'UA-197045426-1'); 
         gtag('event', 'test_optmize', {
           'event_category' : 'optmize_server_side_fe',

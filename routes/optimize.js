@@ -28,7 +28,7 @@ router.get('/be', (req, res, next)=>{
     };
     /*-++-++++=-++---+-=-++++---=-++++--+=-++++-+-=--+-+++-=-++---++=-++-++++=-++-++-+*/
     res.render('optimize/expBE', {
-        title: 'Optimize Server-side Experiments Demo',
+        title: 'Optimize Server-side Experiments Demo: BE',
         optimize_expId: optimize_expId,
         optimize_expVar: optimize_expVar,
         expTitle: "be optimize variation "+optimize_expVar,
@@ -48,7 +48,7 @@ router.get('/dw/', (req, res, next)=>{
         res.cookie(cookieName, optimize_expVar, { maxAge: 24*60*60*365*2});
     };
     res.render('optimize/expDW', {
-        title: 'Optimize Server-side Experiments Demo: BE',
+        title: 'Optimize Server-side Experiments Demo: DW',
         optimize_expId: optimize_expId,
         optimize_expVar: optimize_expVar,
         expTitle: "dw optimize variation "+optimize_expVar,
